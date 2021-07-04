@@ -1,8 +1,6 @@
 package dotsetup
 
-import (
-	"log"
-)
+import "log"
 
 type Package struct {
 	Name string
