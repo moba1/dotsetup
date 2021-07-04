@@ -17,7 +17,7 @@ func NewScript(commands []Command) Script {
 }
 
 func (s *Script) Execute() error {
-	for _, command := range s.flat() {
+	for _, command := range s.Flat() {
 		cmd := exec.Command(command[0], command[1:]...)
 		var errOut bytes.Buffer
 		cmd.Stderr = &errOut
@@ -29,7 +29,7 @@ func (s *Script) Execute() error {
 	return nil
 }
 
-func (s *Script) flat() []RawCommand {
+func (s *Script) Flat() []RawCommand {
 	script := []RawCommand{}
 	for _, command := range s.commands {
 		script = append(script, command.RawCommands()...)
