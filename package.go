@@ -9,7 +9,7 @@ type Package struct {
 	Name string
 }
 
-func (p *Package) ToCommand() []string {
+func (p *Package) Script() []string {
 	var pm string
 	var pm_opts []string
 	switch Os {

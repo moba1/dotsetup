@@ -8,7 +8,7 @@ type Link struct {
 	Force     bool
 }
 
-func (l *Link) ToCommand() []string {
+func (l *Link) Script() []string {
 	option := "-s"
 	if l.Force {
 		option = "-sf"

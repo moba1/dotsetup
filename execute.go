@@ -4,7 +4,7 @@ type Execute struct {
 	Command string
 }
 
-func (e *Execute) ToCommand() []string {
+func (e *Execute) Script() []string {
 	return []string{
 		e.Command,
 	}

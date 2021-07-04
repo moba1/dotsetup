@@ -1,5 +1,5 @@
 package docsetup
 
-type CommandConverter interface {
-	ToCommand() []string
+type Command interface {
+	Script() []string
 }

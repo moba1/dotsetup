@@ -5,7 +5,7 @@ type Directory struct {
 	Mode string
 }
 
-func (d *Directory) ToCommand() []string {
+func (d *Directory) Script() []string {
 	opts := []string{}
 	if len(d.Mode) != 0 {
 		opts = append(opts, "-m", d.Mode)
