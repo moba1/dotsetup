@@ -32,7 +32,7 @@ func (s *Script) Execute() error {
 func (s *Script) flat() []RawCommand {
 	script := []RawCommand{}
 	for _, command := range s.commands {
-		script = append(script, command.RawCommand()...)
+		script = append(script, command.RawCommands()...)
 	}
 	return script
 }

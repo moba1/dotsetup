@@ -6,7 +6,7 @@ type Link struct {
 	Force     bool
 }
 
-func (l *Link) Command() []RawCommand {
+func (l *Link) RawCommands() []RawCommand {
 	option := "-s"
 	if l.Force {
 		option = "-sf"

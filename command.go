@@ -9,5 +9,5 @@ func (s *RawCommand) String() string {
 }
 
 type Command interface {
-	RawCommand() []RawCommand
+	RawCommands() []RawCommand
 }

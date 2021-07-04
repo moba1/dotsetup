@@ -8,7 +8,7 @@ type Package struct {
 	Name string
 }
 
-func (p *Package) Command() []RawCommand {
+func (p *Package) RawCommands() []RawCommand {
 	var pm string
 	var pm_opts []string
 	switch Os {

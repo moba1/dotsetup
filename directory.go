@@ -5,7 +5,7 @@ type Directory struct {
 	Mode string
 }
 
-func (d *Directory) Command() []RawCommand {
+func (d *Directory) RawCommands() []RawCommand {
 	opts := []string{}
 	if len(d.Mode) != 0 {
 		opts = append(opts, "-m", d.Mode)

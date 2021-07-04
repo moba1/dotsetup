@@ -4,7 +4,7 @@ type Execute struct {
 	RawCommand []string
 }
 
-func (e *Execute) Command() []RawCommand {
+func (e *Execute) RawCommands() []RawCommand {
 	return []RawCommand{
 		e.RawCommand,
 	}
