@@ -1,11 +1,11 @@
 package docsetup
 
 type Execute struct {
-	Command string
+	RawCommand []string
 }
 
-func (e *Execute) Script() []string {
-	return []string{
-		e.Command,
+func (e *Execute) Command() []RawCommand {
+	return []RawCommand{
+		e.RawCommand,
 	}
 }

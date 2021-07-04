@@ -2,14 +2,13 @@ package docsetup
 
 import (
 	"log"
-	"strings"
 )
 
 type Package struct {
 	Name string
 }
 
-func (p *Package) Script() []string {
+func (p *Package) Command() []RawCommand {
 	var pm string
 	var pm_opts []string
 	switch Os {
@@ -25,7 +24,7 @@ func (p *Package) Script() []string {
 
 	command := append([]string{"sudo", pm}, pm_opts...)
 	command = append(command, p.Name)
-	return []string{
-		strings.Join(command, " "),
+	return []RawCommand{
+		command,
 	}
 }
