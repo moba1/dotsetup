@@ -1,4 +1,4 @@
-package docsetup
+package dotsetup
 
 type Directory struct {
 	Path string

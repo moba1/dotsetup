@@ -1,4 +1,4 @@
-package docsetup
+package dotsetup
 
 type Execute struct {
 	RawCommand []string

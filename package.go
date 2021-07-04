@@ -1,4 +1,4 @@
-package docsetup
+package dotsetup
 
 import (
 	"log"
