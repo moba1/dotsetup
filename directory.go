@@ -1,0 +1,18 @@
+package dotsetup
+
+type Directory struct {
+	Path string
+	Mode string
+}
+
+func (d *Directory) RawCommands() []RawCommand {
+	opts := []string{}
+	if len(d.Mode) != 0 {
+		opts = append(opts, "-m", d.Mode)
+	}
+	command := append([]string{"mkdir", "-p"}, opts...)
+	command = append(command, d.Path)
+	return []RawCommand{
+		command,
+	}
+}
