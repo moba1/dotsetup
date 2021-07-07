@@ -142,3 +142,4 @@ l := dotsetup.Link{
 `Os` var is os name.
 
 If runtime is Linux, `Os` var is equal to `/etc/os-release`'s `NAME` var.
+In other runtime, equal to `runtime.GOOS`.
