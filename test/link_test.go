@@ -20,7 +20,7 @@ func TestLink_Command(t *testing.T) {
 	}
 	l := dotsetup.Link{
 		Source:    src,
-		Destition: dest,
+		Destination: dest,
 		Force:     force,
 	}
 	test_Command(t, expected, &l)
