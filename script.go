@@ -3,11 +3,14 @@ package dotsetup
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"os/exec"
+	"time"
 )
 
 type Script struct {
 	commands []Command
+	Debug bool
 }
 
 func NewScript(commands []Command) Script {
@@ -18,6 +21,13 @@ func NewScript(commands []Command) Script {
 
 func (s *Script) Execute() error {
 	for _, command := range s.Flat() {
+		if s.Debug {
+			prompt := fmt.Sprintf(
+				"[%s] [exec]",
+				time.Now().Format(time.RFC3339),
+			)
+			println(prompt, command)
+		}
 		cmd := exec.Command(command[0], command[1:]...)
 		var errOut bytes.Buffer
 		cmd.Stderr = &errOut
