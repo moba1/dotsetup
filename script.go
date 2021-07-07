@@ -10,7 +10,6 @@ import (
 
 type Script struct {
 	commands []Command
-	Debug    bool
 }
 
 func NewScript(commands []Command) Script {
@@ -19,9 +18,9 @@ func NewScript(commands []Command) Script {
 	}
 }
 
-func (s *Script) Execute() error {
+func (s *Script) Execute(debug bool) error {
 	for _, command := range s.Flat() {
-		if s.Debug {
+		if debug {
 			prompt := fmt.Sprintf(
 				"[%s]",
 				time.Now().Format(time.RFC3339),
