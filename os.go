@@ -19,6 +19,8 @@ func init() {
 		if len(Os) == 0 {
 			err = errors.New("unsupported linux distro")
 		}
+	case "darwin":
+		Os = runtime.GOOS
 	default:
 		log.Fatal("unsupported OS")
 	}
