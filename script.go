@@ -10,7 +10,7 @@ import (
 
 type Script struct {
 	commands []Command
-	Debug    bool
+	Debug bool
 }
 
 func NewScript(commands []Command) Script {
