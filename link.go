@@ -2,7 +2,7 @@ package dotsetup
 
 type Link struct {
 	Source    string
-	Destition string
+	Destination string
 	Force     bool
 }
 
@@ -12,7 +12,7 @@ func (l *Link) RawCommands() []RawCommand {
 		option = "-sf"
 	}
 	command := []string{
-		"ln", option, l.Source, l.Destition,
+		"ln", option, l.Source, l.Destination,
 	}
 	return []RawCommand{
 		command,
