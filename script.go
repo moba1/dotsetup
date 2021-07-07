@@ -23,11 +23,13 @@ func (s *Script) Execute() error {
 	for _, command := range s.Flat() {
 		if s.Debug {
 			prompt := fmt.Sprintf(
-				"[%s] [exec]",
+				"[%s]",
 				time.Now().Format(time.RFC3339),
 			)
-			println(prompt, command)
+			commandStr := fmt.Sprintf("%v", command)
+			println(prompt, commandStr)
 		}
+
 		cmd := exec.Command(command[0], command[1:]...)
 		var errOut bytes.Buffer
 		cmd.Stderr = &errOut
