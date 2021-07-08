@@ -18,6 +18,7 @@ func (p *Package) RawCommands() []RawCommand {
 		pm_opts = []string{"install", "-y"}
 	case "darwin":
 		pm = []string{"brew"}
+		pm_opts = []string{"install", "-f"}
 	default:
 		log.Fatal("unsupported OS")
 	}
