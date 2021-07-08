@@ -1,9 +1,9 @@
 package dotsetup
 
 type Link struct {
-	Source    string
+	Source      string
 	Destination string
-	Force     bool
+	Force       bool
 }
 
 func (l *Link) RawCommands() []RawCommand {
