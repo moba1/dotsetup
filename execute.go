@@ -13,7 +13,7 @@ func (e *Execute) Commands() []Command {
 	cs := []Command{}
 	for _, c := range e.RawCommands {
 		cs = append(cs, Command{
-			rawCommand: c.RawCommand,
+			rawCommand: append(RawCommand{"sudo", "-S"}, c.RawCommand...),
 			doRoot:     c.DoRool,
 		})
 	}
