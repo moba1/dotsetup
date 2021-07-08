@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"os"
 	"os/exec"
 	"time"
 )
@@ -21,6 +22,9 @@ func NewScript(commands []Command) Script {
 
 func (s *Script) Execute() error {
 	for _, command := range s.Flat() {
+		cmd := exec.Command(command[0], command[1:]...)
+		var errOut bytes.Buffer
+		cmd.Stderr = &errOut
 		if s.Debug {
 			prompt := fmt.Sprintf(
 				"[%s]",
@@ -28,11 +32,8 @@ func (s *Script) Execute() error {
 			)
 			commandStr := fmt.Sprintf("%v", command)
 			println(prompt, commandStr)
+			cmd.Stdout = os.Stdout
 		}
-
-		cmd := exec.Command(command[0], command[1:]...)
-		var errOut bytes.Buffer
-		cmd.Stderr = &errOut
 		if err := cmd.Run(); err != nil {
 			return errors.New(errOut.String())
 		}
