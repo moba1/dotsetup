@@ -5,14 +5,17 @@ type Directory struct {
 	Mode string
 }
 
-func (d *Directory) RawCommands() []RawCommand {
+func (d *Directory) Commands() []Command {
 	opts := []string{}
 	if len(d.Mode) != 0 {
 		opts = append(opts, "-m", d.Mode)
 	}
-	command := append([]string{"mkdir", "-p"}, opts...)
-	command = append(command, d.Path)
-	return []RawCommand{
-		command,
+	rawCommand := append([]string{"mkdir", "-p"}, opts...)
+	rawCommand = append(rawCommand, d.Path)
+	return []Command{
+		{
+			rawCommand: rawCommand,
+			doRoot:     false,
+		},
 	}
 }

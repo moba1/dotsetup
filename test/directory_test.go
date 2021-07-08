@@ -14,22 +14,22 @@ func TestDirectory_Command(t *testing.T) {
 		Path: path,
 		Mode: mode,
 	}
-	expected := []dotsetup.RawCommand{
-		{
-			"mkdir", "-p", "-m", mode,
-			path,
-		},
+	expected := []dotsetup.Command{
+		dotsetup.NewCommand(
+			dotsetup.RawCommand{"mkdir", "-p", "-m", mode, path},
+			false,
+		),
 	}
-	test_Command(t, expected, &d)
+	test_CommandArray(t, expected, d.Commands())
 
 	d = dotsetup.Directory{
 		Path: path,
 	}
-	expected = []dotsetup.RawCommand{
-		{
-			"mkdir", "-p",
-			path,
-		},
+	expected = []dotsetup.Command{
+		dotsetup.NewCommand(
+			dotsetup.RawCommand{"mkdir", "-p", path},
+			false,
+		),
 	}
-	test_Command(t, expected, &d)
+	test_CommandArray(t, expected, d.Commands())
 }

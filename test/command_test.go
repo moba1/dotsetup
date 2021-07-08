@@ -24,13 +24,18 @@ func TestRawCommand_String(t *testing.T) {
 	}
 }
 
-func test_Command(t *testing.T, expected []dotsetup.RawCommand, c dotsetup.Command) {
-	retVal := c.RawCommands()
-	if !reflect.DeepEqual(expected, retVal) {
+func test_Command(t *testing.T, expectedVal dotsetup.Command, realVal dotsetup.Command) {
+	if !reflect.DeepEqual(expectedVal, realVal) {
 		t.Error(
-			"expected: ", expected,
+			"expected value: ", expectedVal,
 			", ",
-			"return value: ", retVal,
+			"real value: ", realVal,
 		)
+	}
+}
+
+func test_CommandArray(t *testing.T, expectedVals []dotsetup.Command, realVals []dotsetup.Command) {
+	for i, expectedVal := range expectedVals {
+		test_Command(t, expectedVal, realVals[i])
 	}
 }

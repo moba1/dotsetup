@@ -1,11 +1,21 @@
 package dotsetup
 
-type Execute struct {
-	RawCommand []string
+type ExecuteCommand struct {
+	RawCommand RawCommand
+	DoRool     bool
 }
 
-func (e *Execute) RawCommands() []RawCommand {
-	return []RawCommand{
-		e.RawCommand,
+type Execute struct {
+	RawCommands []ExecuteCommand
+}
+
+func (e *Execute) Commands() []Command {
+	cs := []Command{}
+	for _, c := range e.RawCommands {
+		cs = append(cs, Command{
+			rawCommand: c.RawCommand,
+			doRoot:     c.DoRool,
+		})
 	}
+	return cs
 }

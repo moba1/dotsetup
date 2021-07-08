@@ -10,32 +10,38 @@ import (
 )
 
 type Script struct {
-	commands []Command
-	Debug    bool
+	tasks []Task
+	Debug bool
 }
 
-func NewScript(commands []Command) Script {
+func NewScript(tasks []Task) Script {
 	return Script{
-		commands: commands,
+		tasks: tasks,
 	}
 }
 
-func (s *Script) Execute() error {
-	for _, command := range s.Flat() {
-		cmd := exec.Command(command[0], command[1:]...)
-		var errOut bytes.Buffer
-		cmd.Stderr = &errOut
-		if s.Debug {
-			prompt := fmt.Sprintf(
-				"[%s]",
-				time.Now().Format(time.RFC3339),
-			)
-			commandStr := fmt.Sprintf("%v", command)
-			println(prompt, commandStr)
-			cmd.Stdout = os.Stdout
-		}
-		if err := cmd.Run(); err != nil {
-			return errors.New(errOut.String())
+func (s *Script) Execute(sudoPass string) error {
+	for _, task := range s.tasks {
+		for _, command := range task.Commands() {
+			cmd := exec.Command(command.rawCommand[0], command.rawCommand[1:]...)
+			var errOut bytes.Buffer
+			cmd.Stderr = &errOut
+			if command.doRoot {
+				cmd.Stdin = bytes.NewBuffer([]byte(sudoPass))
+			}
+
+			if s.Debug {
+				prompt := fmt.Sprintf(
+					"[%s]",
+					time.Now().Format(time.RFC3339),
+				)
+				commandStr := fmt.Sprintf("%v", command)
+				println(prompt, commandStr)
+				cmd.Stdout = os.Stdout
+			}
+			if err := cmd.Run(); err != nil {
+				return errors.New(errOut.String())
+			}
 		}
 	}
 
@@ -44,8 +50,10 @@ func (s *Script) Execute() error {
 
 func (s *Script) Flat() []RawCommand {
 	script := []RawCommand{}
-	for _, command := range s.commands {
-		script = append(script, command.RawCommands()...)
+	for _, task := range s.tasks {
+		for _, command := range task.Commands() {
+			script = append(script, command.rawCommand)
+		}
 	}
 	return script
 }

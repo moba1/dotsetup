@@ -13,12 +13,15 @@ func TestPackage_Command(t *testing.T) {
 	}
 	switch dotsetup.Os {
 	case "Debian GNU/Linux":
-		expected := []dotsetup.RawCommand{
-			{
-				"sudo", "apt", "install", "-y", "sample-package",
-			},
+		expected := []dotsetup.Command{
+			dotsetup.NewCommand(
+				dotsetup.RawCommand{
+					"sudo", "-S", "apt-get", "install", "-y", "sample-package",
+				},
+				true,
+			),
 		}
-		test_Command(t, expected, &p)
+		test_CommandArray(t, expected, p.Commands())
 	default:
 		t.Error("unsupported OS")
 	}
