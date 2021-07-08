@@ -30,8 +30,10 @@ c := dotsetup.Curl{
 	Args: []string{"-o", "/tmp/index.html", "https://example.com/index.html"}
 }
 // execute all tasks
-s := dotsetup.NewScript([]dotsetup.Command{sp, c})
-if err := s.Execute(); err != nil {
+s := dotsetup.NewScript([]dotsetup.Task{sp, c})
+// enable debug mode
+s.Debug = true
+if err := s.Execute("sudo password"); err != nil {
 	log.Fatal(err)
 }
 ```
@@ -106,14 +108,17 @@ execute shell command.
 
 | Property | type | description |
 |:--------:|:----:|:-----------:|
-| RawCommand | []string | shell command |
+| RawCommands | []dotsetup.ExecuteCommand | shell commands |
 
 ```go
 import "github.com/moba1/dotsetup"
 
-// execute `ls -l`
+// execute `sudo -S ls -l`
 e := dotsetup.Execute{
-	RawCommand: []string{"ls", "-l"}
+	RawCommands: []dotsetup.ExecuteCommand{
+		RawCommand: dotsetup.RawCommand{"ls", "-l"},
+		DoRoot: true
+	},
 }
 ```
 
