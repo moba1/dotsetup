@@ -12,10 +12,10 @@ func (p *Package) Commands() []Command {
 	doRoot := true
 	sudo := []string{"sudo", "-S"}
 	switch Os {
-	case "Fedora":
+	case "Fedora", "CentOS Linux":
 		pm = append(sudo, "dnf")
 		pm_opts = []string{"install", "-y"}
-	case "Debian GNU/Linux":
+	case "Debian GNU/Linux", "Ubuntu":
 		pm = append(sudo, "apt-get")
 		pm_opts = []string{"install", "-y"}
 	case "darwin":
