@@ -14,7 +14,7 @@ func (p *Package) RawCommands() []RawCommand {
 		pm = []string{"sudo", "dnf"}
 		pm_opts = []string{"install", "-y"}
 	case "Debian GNU/Linux":
-		pm = []string{"sudo", "apt"}
+		pm = []string{"sudo", "apt-get"}
 		pm_opts = []string{"install", "-y"}
 	case "darwin":
 		pm = []string{"brew"}
