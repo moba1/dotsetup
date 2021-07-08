@@ -4,8 +4,11 @@ type Curl struct {
 	Args []string
 }
 
-func (c *Curl) RawCommands() []RawCommand {
-	return []RawCommand{
-		append([]string{"curl"}, c.Args...),
+func (c *Curl) Commands() []Command {
+	return []Command{
+		{
+			rawCommand: append([]string{"curl"}, c.Args...),
+			doRoot:     false,
+		},
 	}
 }

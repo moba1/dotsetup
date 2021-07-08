@@ -6,15 +6,18 @@ type Link struct {
 	Force       bool
 }
 
-func (l *Link) RawCommands() []RawCommand {
+func (l *Link) Commands() []Command {
 	option := "-s"
 	if l.Force {
 		option = "-sf"
 	}
-	command := []string{
+	rawCommand := []string{
 		"ln", option, l.Source, l.Destination,
 	}
-	return []RawCommand{
-		command,
+	return []Command{
+		{
+			rawCommand: rawCommand,
+			doRoot:     false,
+		},
 	}
 }

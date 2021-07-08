@@ -7,14 +7,22 @@ import (
 )
 
 func TestExecute_Command(t *testing.T) {
-	command := []string{
+	rawCommand := dotsetup.RawCommand{
 		"col", "-b", "-x",
 	}
 	e := dotsetup.Execute{
-		RawCommand: command,
+		RawCommands: []dotsetup.ExecuteCommand{
+			{
+				RawCommand: rawCommand,
+				DoRool: false,
+			},
+		},
 	}
-	expected := []dotsetup.RawCommand{
-		command,
+	expected := []dotsetup.Command{
+		dotsetup.NewCommand(
+			rawCommand,
+			false,
+		),
 	}
-	test_Command(t, expected, &e)
+	test_CommandArray(t, expected, e.Commands())
 }
