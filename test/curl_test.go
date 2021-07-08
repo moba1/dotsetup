@@ -14,8 +14,11 @@ func TestCurl_Command(t *testing.T) {
 	c := dotsetup.Curl{
 		Args: args,
 	}
-	expected := []dotsetup.RawCommand{
-		append(dotsetup.RawCommand{"curl"}, args...),
+	expectedVals := []dotsetup.Command{
+		dotsetup.NewCommand(
+			append(dotsetup.RawCommand{"curl"}, args...),
+			false,
+		),
 	}
-	test_Command(t, expected, &c)
+	test_CommandArray(t, expectedVals, c.Commands())
 }
