@@ -19,7 +19,7 @@ This sample executes series of process to
 
 ```go
 import (
-	"github.com/moba1/dotsetup"
+	"github.com/moba1/dotsetup/v2"
 	"log"
 )
 
@@ -59,7 +59,7 @@ install package.
 | Name     | string | target package name |
 
 ```go
-import "github.com/moba1/dotsetup"
+import "github.com/moba1/dotsetup/v2"
 
 // install `sample-package`
 p := dotsetup.Package{
@@ -76,7 +76,7 @@ This task represents `curl` command.
 | Args     | []string | `curl` command arguments |
 
 ```go
-import "github.com/moba1/dotsetup"
+import "github.com/moba1/dotsetup/v2"
 
 // execute `curl -o /tmp/sample.txt https://github.com`
 c := dotsetup.Curl{
@@ -96,7 +96,7 @@ create directory.
 | Mode     | string | directory mode |
 
 ```go
-import "github.com/moba1/dotsetup"
+import "github.com/moba1/dotsetup/v2"
 
 // create `/tmp/directory` directory with mode "rwxr-xr-x"
 d := dotsetup.Directory{
@@ -114,7 +114,7 @@ execute shell command.
 | RawCommands | []dotsetup.ExecuteCommand | shell commands |
 
 ```go
-import "github.com/moba1/dotsetup"
+import "github.com/moba1/dotsetup/v2"
 
 // execute `sudo -S ls -l`
 e := dotsetup.Execute{
@@ -136,7 +136,7 @@ create symbolic link.
 | Force    | set force mode |
 
 ```go
-import "github.com/moba1/dotsetup"
+import "github.com/moba1/dotsetup/v2"
 
 // put symbolic link from `/dev/null` to `/tmp/null`
 l := dotsetup.Link{
