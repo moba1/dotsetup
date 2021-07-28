@@ -2,7 +2,7 @@ package dotsetup
 
 type ExecuteCommand struct {
 	RawCommand RawCommand
-	DoRool     bool
+	DoRoot     bool
 }
 
 type Execute struct {
@@ -14,7 +14,7 @@ func (e *Execute) Commands() []Command {
 	for _, c := range e.RawCommands {
 		cs = append(cs, Command{
 			rawCommand: c.RawCommand,
-			doRoot:     c.DoRool,
+			doRoot:     c.DoRoot,
 		})
 	}
 	return cs

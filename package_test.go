@@ -1,21 +1,17 @@
-package dotsetup_test
+package dotsetup
 
-import (
-	"testing"
-
-	"github.com/moba1/dotsetup"
-)
+import "testing"
 
 func TestPackage_Command(t *testing.T) {
 	pack := "sample-package"
-	p := dotsetup.Package{
+	p := Package{
 		Name: pack,
 	}
-	switch dotsetup.Os {
-	case "Debian GNU/Linux":
-		expected := []dotsetup.Command{
-			dotsetup.NewCommand(
-				dotsetup.RawCommand{
+	switch Os {
+	case "Debian GNU/Linux", "Ubuntu":
+		expected := []Command{
+			NewCommand(
+				RawCommand{
 					"sudo", "-S", "apt-get", "install", "-y", "sample-package",
 				},
 				true,

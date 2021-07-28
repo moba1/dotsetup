@@ -16,7 +16,7 @@ type Command struct {
 func NewCommand(rawCommand RawCommand, doRoot bool) Command {
 	return Command{
 		rawCommand: rawCommand,
-		doRoot: doRoot,
+		doRoot:     doRoot,
 	}
 }
 

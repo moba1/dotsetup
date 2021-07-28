@@ -1,16 +1,14 @@
-package dotsetup_test
+package dotsetup
 
 import (
 	"fmt"
 	"reflect"
 	"strings"
 	"testing"
-
-	"github.com/moba1/dotsetup"
 )
 
 func TestRawCommand_String(t *testing.T) {
-	rc := dotsetup.RawCommand{
+	rc := RawCommand{
 		"ls", "-l",
 	}
 	expected := strings.Join(rc, " ")
@@ -24,7 +22,7 @@ func TestRawCommand_String(t *testing.T) {
 	}
 }
 
-func test_Command(t *testing.T, expectedVal dotsetup.Command, realVal dotsetup.Command) {
+func test_Command(t *testing.T, expectedVal Command, realVal Command) {
 	if !reflect.DeepEqual(expectedVal, realVal) {
 		t.Error(
 			"expected value: ", expectedVal,
@@ -34,7 +32,7 @@ func test_Command(t *testing.T, expectedVal dotsetup.Command, realVal dotsetup.C
 	}
 }
 
-func test_CommandArray(t *testing.T, expectedVals []dotsetup.Command, realVals []dotsetup.Command) {
+func test_CommandArray(t *testing.T, expectedVals []Command, realVals []Command) {
 	for i, expectedVal := range expectedVals {
 		test_Command(t, expectedVal, realVals[i])
 	}

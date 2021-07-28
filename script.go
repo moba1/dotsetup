@@ -23,7 +23,11 @@ func NewScript(tasks []Task) Script {
 func (s *Script) Execute(sudoPass string) error {
 	for _, task := range s.tasks {
 		for _, command := range task.Commands() {
-			cmd := exec.Command(command.rawCommand[0], command.rawCommand[1:]...)
+			rawCommand := command.rawCommand
+			if command.doRoot {
+				rawCommand = append(RawCommand{"sudo", "-S"}, rawCommand...)
+			}
+			cmd := exec.Command(rawCommand[0], rawCommand[1:]...)
 			var errOut bytes.Buffer
 			cmd.Stderr = &errOut
 			if command.doRoot {
