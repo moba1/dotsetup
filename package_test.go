@@ -8,7 +8,7 @@ func TestPackage_Command(t *testing.T) {
 		Name: pack,
 	}
 	switch Os {
-	case "Debian GNU/Linux":
+	case "Debian GNU/Linux", "Ubuntu":
 		expected := []Command{
 			NewCommand(
 				RawCommand{
