@@ -12,12 +12,8 @@ type Execute struct {
 func (e *Execute) Commands() []Command {
 	cs := []Command{}
 	for _, c := range e.RawCommands {
-		rc := RawCommand{}
-		if c.DoRoot {
-			rc = RawCommand{"sudo", "-S"}
-		}
 		cs = append(cs, Command{
-			rawCommand: append(rc, c.RawCommand...),
+			rawCommand: c.RawCommand,
 			doRoot:     c.DoRoot,
 		})
 	}
