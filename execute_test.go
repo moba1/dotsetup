@@ -10,7 +10,7 @@ func TestExecute_Command(t *testing.T) {
 		RawCommands: []ExecuteCommand{
 			{
 				RawCommand: rawCommand,
-				DoRoot: false,
+				DoRoot:     false,
 			},
 		},
 	}

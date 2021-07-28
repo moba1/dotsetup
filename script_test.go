@@ -15,7 +15,7 @@ func TestScript_Flat(t *testing.T) {
 			RawCommands: []ExecuteCommand{
 				{
 					RawCommand: rawCommands[0],
-					DoRoot: false,
+					DoRoot:     false,
 				},
 			},
 		},
@@ -23,7 +23,7 @@ func TestScript_Flat(t *testing.T) {
 			RawCommands: []ExecuteCommand{
 				{
 					RawCommand: rawCommands[1],
-					DoRoot: false,
+					DoRoot:     false,
 				},
 			},
 		},
