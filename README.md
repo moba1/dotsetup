@@ -1,3 +1,5 @@
+![test](https://github.com/moba1/dotsetup/actions/workflows/test.yml/badge.svg)
+
 # dotsetup
 
 dotsetup is a library for seting up dotfiles.
@@ -30,6 +32,7 @@ c := dotsetup.Curl{
 	Args: []string{"-o", "/tmp/index.html", "https://example.com/index.html"}
 }
 // execute all tasks
+// order: sp -> c
 s := dotsetup.NewScript([]dotsetup.Task{sp, c})
 // enable debug mode
 s.Debug = true
