@@ -2,7 +2,7 @@ package dotsetup
 
 type ExecuteCommand struct {
 	RawCommand RawCommand
-	DoRool     bool
+	DoRoot     bool
 }
 
 type Execute struct {
@@ -12,9 +12,13 @@ type Execute struct {
 func (e *Execute) Commands() []Command {
 	cs := []Command{}
 	for _, c := range e.RawCommands {
+		rc := RawCommand{}
+		if c.DoRoot {
+			rc = RawCommand{"sudo", "-S"}
+		}
 		cs = append(cs, Command{
-			rawCommand: append(RawCommand{"sudo", "-S"}, c.RawCommand...),
-			doRoot:     c.DoRool,
+			rawCommand: append(rc, c.RawCommand...),
+			doRoot:     c.DoRoot,
 		})
 	}
 	return cs

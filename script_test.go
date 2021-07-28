@@ -1,37 +1,35 @@
-package dotsetup_test
+package dotsetup
 
 import (
 	"reflect"
 	"testing"
-
-	"github.com/moba1/dotsetup"
 )
 
 func TestScript_Flat(t *testing.T) {
-	rawCommands := [...]dotsetup.RawCommand{
+	rawCommands := [...]RawCommand{
 		{"echo", "hello"},
 		{"echo", "world"},
 	}
-	execs := []dotsetup.Task{
-		&dotsetup.Execute{
-			RawCommands: []dotsetup.ExecuteCommand{
+	execs := []Task{
+		&Execute{
+			RawCommands: []ExecuteCommand{
 				{
 					RawCommand: rawCommands[0],
-					DoRool: false,
+					DoRoot: false,
 				},
 			},
 		},
-		&dotsetup.Execute{
-			RawCommands: []dotsetup.ExecuteCommand{
+		&Execute{
+			RawCommands: []ExecuteCommand{
 				{
 					RawCommand: rawCommands[1],
-					DoRool: false,
+					DoRoot: false,
 				},
 			},
 		},
 	}
-	s := dotsetup.NewScript(execs)
-	expected := []dotsetup.RawCommand{}
+	s := NewScript(execs)
+	expected := []RawCommand{}
 	for _, exec := range execs {
 		for _, command := range exec.Commands() {
 			expected = append(expected, command.RawCommand())
