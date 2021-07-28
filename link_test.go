@@ -28,7 +28,7 @@ func TestLink_Command(t *testing.T) {
 	expected = []Command{
 		NewCommand(
 			RawCommand{
-			"ln", "-sf", src, dest,
+				"ln", "-sf", src, dest,
 			},
 			false,
 		),
