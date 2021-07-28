@@ -43,7 +43,7 @@ if err := s.Execute("sudo password"); err != nil {
 
 ## Runnning Tests
 ```bash
-$ sudo docker-compose -f test/docker-compose.yml up
+$ go test -v ./...
 ```
 
 ## Task
