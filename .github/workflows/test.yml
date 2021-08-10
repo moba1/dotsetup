@@ -12,11 +12,18 @@ jobs:
         name: ${{ matrix.os }} test
         steps:
             - uses: actions/checkout@v2
-            - name: test
+            - name: setup golang
               uses: actions/setup-go@v2
               with:
                   go-version: ${{ matrix.go-version }}
-            - name: get deps
-              run: go get -v -t -d ./...
-            - name: run test
-              run: go test -v ./...
+            - name: test
+              run: |
+                for dockerfile in $(find test -type f -name Dockerfile.'*')
+                do
+                  name=$(date +%s.%N | sha256sum | cut -f 1 -d ' ' | fold -w 12 | head -n 1)
+                  echo "$dockerfile"
+                  cat "$dockerfile"
+                  docker build -t "$name" -f "$dockerfile" .
+                  docker run --rm -v "$(pwd)":/app/src "$name"
+                  docker rmi "$name"
+                done

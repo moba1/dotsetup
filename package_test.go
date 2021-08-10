@@ -7,18 +7,21 @@ func TestPackage_Command(t *testing.T) {
 	p := Package{
 		Name: pack,
 	}
+	var commands RawCommand
 	switch Os {
-	case "Debian GNU/Linux", "Ubuntu":
-		expected := []Command{
-			NewCommand(
-				RawCommand{
-					"sudo", "-S", "apt-get", "install", "-y", "sample-package",
-				},
-				true,
-			),
+	case "debian", "ubuntu":
+		commands = RawCommand{
+			"sudo", "-S", "apt-get", "install", "-y", pack,
 		}
-		test_CommandArray(t, expected, p.Commands())
+	case "fedora":
+		commands = RawCommand{
+			"sudo", "-S", "dnf", "install", "-y", pack,
+		}
 	default:
 		t.Error("unsupported OS")
 	}
+	expected := []Command{
+		NewCommand(commands, true),
+	}
+	test_CommandArray(t, expected, p.Commands())
 }
