@@ -30,7 +30,7 @@ func init() {
 }
 
 func linux() (string, error) {
-	cmd := exec.Command("/bin/sh", "-c", ". /etc/os-release; printf '%s' \"$NAME\"")
+	cmd := exec.Command("/bin/sh", "-c", ". /etc/os-release; printf '%s' \"$ID\"")
 	var out, errOut bytes.Buffer
 	cmd.Stdout = &out
 	cmd.Stderr = &errOut
