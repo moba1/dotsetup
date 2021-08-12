@@ -25,6 +25,9 @@ func (p *Package) Commands() []Command {
 		pm = []string{"brew"}
 		pm_opts = []string{"install", "-f"}
 		doRoot = false
+	case "arch":
+		pm = append(sudo, "pacman")
+		pm_opts = []string{"-S", "--noconfirm"}
 	default:
 		log.Fatal("unsupported OS")
 	}
