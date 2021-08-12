@@ -17,6 +17,10 @@ func TestPackage_Command(t *testing.T) {
 		commands = RawCommand{
 			"sudo", "-S", "dnf", "install", "-y", pack,
 		}
+	case "opensuse-leap", "opensuse-tumbleweed":
+		commands = RawCommand{
+			"sudo", "-S", "zypper", "-n", "install", pack,
+		}
 	default:
 		t.Error("unsupported OS")
 	}

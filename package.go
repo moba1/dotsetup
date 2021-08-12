@@ -12,6 +12,9 @@ func (p *Package) Commands() []Command {
 	doRoot := true
 	sudo := []string{"sudo", "-S"}
 	switch Os {
+	case "opensuse-leap", "opensuse-tumbleweed":
+		pm = append(sudo, "zypper")
+		pm_opts = []string{"-n", "install"}
 	case "fedora":
 		pm = append(sudo, "dnf")
 		pm_opts = []string{"install", "-y"}
