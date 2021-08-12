@@ -15,7 +15,7 @@ func (p *Package) Commands() []Command {
 	case "opensuse-leap", "opensuse-tumbleweed":
 		pm = append(sudo, "zypper")
 		pm_opts = []string{"-n", "install"}
-	case "fedora":
+	case "fedora", "centos":
 		pm = append(sudo, "dnf")
 		pm_opts = []string{"install", "-y"}
 	case "debian", "ubuntu":

@@ -26,6 +26,9 @@ jobs:
                     - image: archlinux
                       tag: latest
                       command: "pacman -Syu --noconfirm && pacman --noconfirm -S go"
+                    - image: centos
+                      tag: latest
+                      command: "dnf -y update && dnf -y upgrade && dnf install -y golang"
         name: ${{ matrix.image }} test
         steps:
             - uses: actions/checkout@v2
