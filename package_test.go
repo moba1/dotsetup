@@ -21,6 +21,10 @@ func TestPackage_Command(t *testing.T) {
 		commands = RawCommand{
 			"sudo", "-S", "zypper", "-n", "install", pack,
 		}
+	case "arch":
+		commands = RawCommand{
+			"sudo", "-S", "pacman", "--noconfirm", "-S", pack,
+		}
 	default:
 		t.Error("unsupported OS")
 	}
