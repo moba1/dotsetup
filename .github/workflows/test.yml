@@ -23,6 +23,9 @@ jobs:
                     - image: opensuse/tumbleweed
                       tag: latest
                       command: "zypper -n update && zypper -n install go"
+                    - image: archlinux
+                      tag: latest
+                      command: "pacman -Syu --noconfirm && pacman --noconfirm -S go"
         name: ${{ matrix.image }} test
         steps:
             - uses: actions/checkout@v2
