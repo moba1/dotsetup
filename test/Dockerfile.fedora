@@ -1,7 +1,0 @@
-FROM fedora:latest
-
-WORKDIR /app/src
-VOLUME /app/src
-
-RUN dnf update -y && dnf install -y golang
-ENTRYPOINT ["go", "test", "-v", "./..."]

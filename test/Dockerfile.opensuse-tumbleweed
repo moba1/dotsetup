@@ -1,7 +1,0 @@
-FROM opensuse/tumbleweed:latest
-
-WORKDIR /app/src
-VOLUME /app/src
-
-RUN zypper -n update && zypper -n install go
-ENTRYPOINT ["go", "test", "-v", "/app/src/..."]

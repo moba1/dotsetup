@@ -1,7 +1,0 @@
-FROM debian:latest
-
-WORKDIR /app/src
-VOLUME /app/src
-
-RUN apt-get update && apt-get install -y golang
-ENTRYPOINT ["go", "test", "-v", "/app/src/..."]

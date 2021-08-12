@@ -4,26 +4,35 @@ on:
         types: [opened, synchronize]
 jobs:
     test:
-        runs-on: ${{ matrix.os }}
+        runs-on: ubuntu-latest
         strategy:
             matrix:
-                os: [ubuntu-latest]
-                go-version: [1.16]
-        name: ${{ matrix.os }} test
+                include:
+                    - image: fedora
+                      tag: latest
+                      command: "dnf -y update && dnf -y upgrade && dnf install -y golang"
+                    - image: debian
+                      tag: latest
+                      command: "export DEBIAN_FRONTEND=noninteractive; apt-get -y update && apt-get upgrade -y && apt-get install -y golang"
+                    - image: ubuntu
+                      tag: latest
+                      command: "export DEBIAN_FRONTEND=noninteractive; apt-get -y update && apt-get upgrade -y && apt-get install -y golang"
+                    - image: opensuse/leap
+                      tag: latest
+                      command: "zypper -n update && zypper -n install go"
+                    - image: opensuse/tumbleweed
+                      tag: latest
+                      command: "zypper -n update && zypper -n install go"
+        name: ${{ matrix.image }} test
         steps:
             - uses: actions/checkout@v2
-            - name: setup golang
-              uses: actions/setup-go@v2
-              with:
-                  go-version: ${{ matrix.go-version }}
             - name: test
               run: |
-                for dockerfile in $(find test -type f -name Dockerfile.'*')
-                do
-                  name=$(date +%s.%N | sha256sum | cut -f 1 -d ' ' | fold -w 12 | head -n 1)
-                  echo "$dockerfile"
-                  cat "$dockerfile"
-                  docker build -t "$name" -f "$dockerfile" .
-                  docker run --rm -v "$(pwd)":/app/src "$name"
-                  docker rmi "$name"
-                done
+                  docker build -t ${{ matrix.image }}-test:latest - << EOF
+                  FROM ${{ matrix.image }}:latest
+                  WORKDIR /app/src
+                  VOLUME /app/src
+                  RUN ${{ matrix.command }}
+                  ENTRYPOINT ["go", "test", "-v", "./..."]
+                  EOF
+                  docker run --rm -v "$(pwd)":/app/src ${{ matrix.image }}-test:latest
