@@ -14,8 +14,8 @@ For exmaple, `dotsetup.Curl` corresponds to `curl` command.
 
 This sample executes series of process to
 
-- install `sample-package`
-- fetch `index.html` from `example.com`
+1. install `sample-package`
+1. fetch `index.html` from `example.com`
 
 ```go
 import (
