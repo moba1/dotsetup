@@ -12,7 +12,10 @@ func (p *Package) Commands() []Command {
 	doRoot := true
 	sudo := []string{"sudo", "-S"}
 	switch Os {
-	case "fedora":
+	case "opensuse-leap", "opensuse-tumbleweed":
+		pm = append(sudo, "zypper")
+		pm_opts = []string{"-n", "install"}
+	case "fedora", "centos":
 		pm = append(sudo, "dnf")
 		pm_opts = []string{"install", "-y"}
 	case "debian", "ubuntu":
@@ -22,6 +25,9 @@ func (p *Package) Commands() []Command {
 		pm = []string{"brew"}
 		pm_opts = []string{"install", "-f"}
 		doRoot = false
+	case "arch":
+		pm = append(sudo, "pacman")
+		pm_opts = []string{"--noconfirm", "-S"}
 	default:
 		log.Fatal("unsupported OS")
 	}

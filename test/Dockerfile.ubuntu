@@ -1,9 +1,0 @@
-FROM ubuntu:latest
-
-WORKDIR /app/src
-VOLUME /app/src
-
-ENV DEBIAN_FRONTEND=noninteractive
-RUN sed -i -e 's%http://[^ ]\+%mirror://mirrors.ubuntu.com/mirrors.txt%g' /etc/apt/sources.list
-RUN apt-get update -y && apt-get install -y golang
-ENTRYPOINT ["go", "test", "-v", "/app/src/..."]

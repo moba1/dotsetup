@@ -13,9 +13,17 @@ func TestPackage_Command(t *testing.T) {
 		commands = RawCommand{
 			"sudo", "-S", "apt-get", "install", "-y", pack,
 		}
-	case "fedora":
+	case "fedora", "centos":
 		commands = RawCommand{
 			"sudo", "-S", "dnf", "install", "-y", pack,
+		}
+	case "opensuse-leap", "opensuse-tumbleweed":
+		commands = RawCommand{
+			"sudo", "-S", "zypper", "-n", "install", pack,
+		}
+	case "arch":
+		commands = RawCommand{
+			"sudo", "-S", "pacman", "--noconfirm", "-S", pack,
 		}
 	default:
 		t.Error("unsupported OS")
