@@ -46,6 +46,16 @@ if err := s.Execute("sudo password"); err != nil {
 $ go test -v ./...
 ```
 
+Success of this test will be determined by the environment.
+Now, test supported OS are
+
+- Debian
+- CentOS (8~)
+- Fedora
+- Arch Linux
+- OpenSUSE tumbleweed/leap
+- Ubuntu
+
 ## Task
 
 `task` represents shell command.
