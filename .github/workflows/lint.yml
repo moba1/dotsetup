@@ -2,6 +2,9 @@ name: lint
 on:
     pull_request:
         types: [opened, synchronize]
+        paths-ignore:
+          - README.md
+          - LICENSE
 jobs:
     golangci-lint:
         name: lint

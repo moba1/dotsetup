@@ -2,6 +2,9 @@ name: test
 on:
     pull_request:
         types: [opened, synchronize]
+        paths-ignore:
+          - README.md
+          - LICENSE
 jobs:
     test:
         runs-on: ubuntu-latest
