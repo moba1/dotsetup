@@ -35,7 +35,7 @@ jobs:
             - name: test
               run: |
                   docker build -t ${{ matrix.image }}-test:latest - << EOF
-                  FROM ${{ matrix.image }}:latest
+                  FROM ${{ matrix.image }}:${{ matrix.tag }}
                   WORKDIR /app/src
                   VOLUME /app/src
                   RUN ${{ matrix.command }}
