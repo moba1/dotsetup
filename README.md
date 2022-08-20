@@ -55,6 +55,7 @@ Now, test supported OS are
 - Arch Linux
 - OpenSUSE tumbleweed/leap
 - Ubuntu
+- Gentoo
 
 ## Task
 
