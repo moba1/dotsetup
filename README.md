@@ -14,8 +14,8 @@ For exmaple, `dotsetup.Curl` corresponds to `curl` command.
 
 This sample executes series of process to
 
-- install `sample-package`
-- fetch `index.html` from `example.com`
+1. install `sample-package`
+1. fetch `index.html` from `example.com`
 
 ```go
 import (
@@ -45,6 +45,17 @@ if err := s.Execute("sudo password"); err != nil {
 ```bash
 $ go test -v ./...
 ```
+
+Success of this test will be determined by the environment.
+Now, test supported OS are
+
+- Debian
+- CentOS (8~)
+- Fedora
+- Arch Linux
+- OpenSUSE tumbleweed/leap
+- Ubuntu
+- Gentoo
 
 ## Task
 
