@@ -25,6 +25,10 @@ func TestPackage_Command(t *testing.T) {
 		commands = RawCommand{
 			"sudo", "-S", "pacman", "--noconfirm", "-S", pack,
 		}
+	case "gentoo":
+		commands = RawCommand{
+			"emrege", pack,
+		}
 	default:
 		t.Error("unsupported OS")
 	}

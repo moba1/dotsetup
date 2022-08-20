@@ -28,6 +28,8 @@ func (p *Package) Commands() []Command {
 	case "arch":
 		pm = append(sudo, "pacman")
 		pm_opts = []string{"--noconfirm", "-S"}
+	case "gentoo":
+		pm = append(sudo, "emerge")
 	default:
 		log.Fatal("unsupported OS")
 	}
